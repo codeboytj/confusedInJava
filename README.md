@@ -1,5 +1,7 @@
 # Java中易混淆的知识点
 
+- [字符串的困惑](./src/main/cumt/tj/learn/string)
+
 ## Comparable接口
 
 ### compareTo()方法
