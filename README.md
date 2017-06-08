@@ -1,6 +1,7 @@
 # Java中易混淆的知识点
 
 - [字符串的困惑](./src/main/cumt/tj/learn/string)
+- [左闭右开](./src/main/cumt/tj/learn/OpenOrClosedInterval.java)
 
 ## Comparable接口
 
