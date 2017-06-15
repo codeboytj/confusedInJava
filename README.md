@@ -2,6 +2,8 @@
 
 - [字符串的困惑](./src/main/cumt/tj/learn/string)
 - [左闭右开](./src/main/cumt/tj/learn/OpenOrClosedInterval.java)
+- [异常处理](./src/main/cumt/tj/learn/exception/)
+- [泛型的困惑](./src/main/cumt/tj/learn/generic)
 
 ## Comparable接口
 
