@@ -1,6 +1,7 @@
 package cumt.tj.learn.generic;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +10,14 @@ import java.util.List;
  * 参数化类型的不可变
  */
 public class InvariantParameterizedType {
+
+
+    class Stack<E>{
+        public void push(E e){}
+        public void pushAll(Iterator<E> src){}
+        //把栈中的全部东东弹出来放到集合src
+        public void popAll(Collection<E> src){}
+    }
 
     public static void main(String[] args) {
 
@@ -28,7 +37,7 @@ public class InvariantParameterizedType {
 
         //2.不可变带来的困惑
         //对于一个存储Number的栈
-        Stack<Number> numberStack=new Stack<>();
+        Stack<Number> numberStack=new InvariantParameterizedType().new Stack<>();
         //如果我插入一个Integer类型的数，就没有任何问题，因为Integer是Number的子类
         numberStack.push(new Integer(123));
 
@@ -38,11 +47,14 @@ public class InvariantParameterizedType {
         //然后利用pushAll插进去，这在逻辑上没有问题，但是就会出现问题，根本通不过编译，因为虽然Integer是Number的子类，但是Iterator<Integer>并不是Iterator<Number>的子类
         //这时候就需要使用有限制的通配符来解决这个问题了
 //        numberStack.pushAll(integerIterator);
+
+        //3. 同理，由于不可变使得popAll的灵活性也受到影响
+        Collection<Number> numberCollection=new ArrayList<>();
+        //这样是没有问题的
+        numberStack.popAll(numberCollection);
+        Collection<Object> objectCollection=new ArrayList<>();
+        //这样在逻辑上是没有问题的，但是还是通不过编译
+//        numberStack.popAll(objectCollection);
     }
 
-}
-
-class Stack<E>{
-    public void push(E e){}
-    public void pushAll(Iterator<E> src){}
 }
