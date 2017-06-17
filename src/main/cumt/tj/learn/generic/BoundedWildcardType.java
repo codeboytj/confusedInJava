@@ -13,7 +13,11 @@ public class BoundedWildcardType {
     class Stack<E>{
         public void push(E e){}
         //使用有限制的通配符解决参数化类型的不可变问题
-        public void pushAll(Iterator<? extends E> src){}
+        public void pushAll(Iterator<? extends E> src){
+//            这句话是不能编译的，需要将Iterator<E>变为Iterator<? extends E>，这个确实很让人困惑
+//            Iterator<E> iterator=src;
+            Iterator<? extends E> iterator=src;
+        }
         public void popAll(Collection<? super E> src){}
     }
 
