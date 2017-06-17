@@ -25,5 +25,10 @@
 
 ## 2. 有限制的通配符
 
-\<? extends E> 配置E及其子类
-\<? super E> 配置E及其超类
+- \<? extends E> 配置E及其子类
+- \<? super E> 配置E及其超类
+- PECS原则，producer-extends，consumer-super，如果传入方法的参数是一个生产E，供方法内部使用的，就要使用\<? extends E>，
+如[BoundedWildcardType](./BoundedWildcardType.java)中的pushAll方法
+如果方法内部生产E，供传入方法的参数消费的，就要使用\<? super E>，如[BoundedWildcardType](./BoundedWildcardType.java)中的popAll方法
+
+对于Comparable与Comparator，传入参数始终是消费者，所以使用他们的使用，需要使用Comparable\<? super E>
