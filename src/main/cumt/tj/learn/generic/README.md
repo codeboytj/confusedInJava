@@ -1,6 +1,7 @@
 #  令人困惑的泛型
 
 - 参考*Effective Java*
+- 参考*Java编程思想*
 
 ## 1. 参数化类型是不可变的
 
@@ -32,3 +33,33 @@
 如果方法内部生产E，供传入方法的参数消费的，就要使用\<? super E>，如[BoundedWildcardType](./BoundedWildcardType.java)中的popAll方法
 
 对于Comparable与Comparator，传入参数始终是消费者，所以使用他们的使用，需要使用Comparable\<? super E>
+
+## 3. 泛型与数组
+
+### 3.1. 泛型数组
+
+正如[GenericArray](./GenericArray.java)中看到的那样，对于类型参数T，由于擦除，不能创建关于它的数组T[]，这是不能通过编译的
+```
+F[] fs=new F[20];
+```
+所以，想要创建泛型数组T[]，就需要先创建一个Object[]，然后对其进行强制转换
+```
+F[] fs=(F[])new Object[20];
+```
+
+### 3.2. 参数化类型的数组
+
+正如[GenericArray](./GenericArray.java)中看到的那样，不能创建带有参数化类型的数组，这是不能编译通过的，因为擦除会擦掉泛型的类型信息，而数组必须知道确切的类型信息，以保证类型安全
+```
+//这句话是不能通过编译的
+List<String>[] stringList=new List<String>[10];
+```
+虽然不能创建带有参数化类型的数组，但是可以创建这种数组的引用，也创建一个非泛型的原生类型数组：
+```
+List<String>[] stringList;
+List[] lists=new List[20];
+```
+利用这一特点，可以将原生类型数组进行强制转换，得到参数化类型的数组：
+```
+stringList=(List<String>[])lists;
+```
