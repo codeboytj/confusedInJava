@@ -13,6 +13,7 @@ import java.io.IOException;
 public class InputStreamRead {
 
     public static void main(String[] args) {
+        System.out.println(System.getProperty("user.dir"));
         try {
             FileOutputStream output = new FileOutputStream("test.dat");
 
@@ -28,7 +29,9 @@ public class InputStreamRead {
             int i;
             while ((i = input.read()) != -1) {
                 //对于写入的ff,read()读取的时候转换成了255，就是说读取的时候当成无符号数读取的
-                System.out.println(i);
+                System.out.print(i+" ");
+                //如果像这样写，就能读出-1，但这貌似有点儿绕，因为文件中显示的"-1"其实是2个字符
+                System.out.println((byte)i);
             }
         } catch (IOException ex) {
             System.out.println(ex.getStackTrace());
